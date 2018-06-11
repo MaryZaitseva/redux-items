@@ -26,3 +26,22 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.table{
+  border: solid black 1px;
+  background-color: teal;
+  border-collapse: collapse;
+}
+
+.table td{
+  border:solid black 1px;
+  width: 250px;
+}
+
+input{
+ width: 250px; 
+}
+
+button{
+  margin-left: 20px;
+}

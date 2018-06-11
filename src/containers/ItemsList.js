@@ -1,9 +1,9 @@
 import React from 'react'
 const ItemsList = props => {
 	let items = props.items.map((item, index) => {
-		return <div key={index}><p>{item[0]}</p><p>{item[1]}</p></div>
+		return <tr key={index}><td>{item[0]}</td><td>{item[1]}</td></tr>
 	})
-    return <div>{items}</div>
+    return <table className="table">{items}</table>
 }
 
 
