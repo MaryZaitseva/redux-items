@@ -13,7 +13,7 @@ const AddItem = ({ dispatch }) => {
 			<button onClick = { e=> {
 				e.preventDefault();
 				if(itemInput.value){
-					dispatch(addItem([id++, itemInput.value, costInput.value]));
+					dispatch(addItem([, itemInput.value, costInput.value]));
 					dispatch(rowAdded())
 					itemInput.value = '';
 					costInput.value = ''

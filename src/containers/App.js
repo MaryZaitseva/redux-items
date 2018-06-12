@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import ItemsList from './ItemsList'
 import  AddItem  from './AddItem'
 import  AddRow  from './AddRow'
-import '../App.css'
+import '../App.css';
 
 class App extends Component {
 	
   render() {
   	return <div>
-  		<ItemsList items={this.props.items} />
+  		<ItemsList items={this.props.items} editingId={this.props.editingId} />
   		<AddRow />
   		{this.props.addingRow ? <AddItem/> : ''}
   	</div>
@@ -18,7 +18,8 @@ class App extends Component {
 
 function mapStateToProps (state) {
   return {
-    items: state.items, 
+    items: state.items,
+    editingId : state.editingId,
     addingRow: state.addingRow
   }
 }

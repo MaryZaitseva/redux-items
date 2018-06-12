@@ -21,13 +21,13 @@ class ItemsList extends React.Component{
   }
 
 render(){
-
+console.log(this.props.items)
   let items = this.props.items.map((item, index) => {
-  if(this.props.editingId === index){
-  return <EditRow />
-}
-else{
-return <tr onMouseOut={(e) => this.mouseOut(e)} onMouseOver={(e) => this.mouseOver(e)} id = {index} key={index}><td>{item[1]}</td><td>{item[2]}</td><td className = "hidden"><DeleteRow/><StartEdit /></td></tr>}
+    if (parseInt(this.props.editingId) === index){
+        return <EditRow editingId = {this.props.editingId}/>
+    } else {
+      return <tr onMouseOut={(e) => this.mouseOut(e)} onMouseOver={(e) => this.mouseOver(e)} id={index} key={index}><td>{item[1]}</td><td>{item[2]}</td>{item[0] === 0 ? ' ' : <td className = "hidden"><DeleteRow/><StartEdit /></td>}</tr>
+    }
 
 
 })
@@ -35,6 +35,5 @@ return <tr onMouseOut={(e) => this.mouseOut(e)} onMouseOver={(e) => this.mouseOv
 }
 	
 }
-
 
 export default connect()(ItemsList)

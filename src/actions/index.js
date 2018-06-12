@@ -5,11 +5,14 @@ export const ADD_ITEM = "ADD_ITEM",
 	EDIT_ROW = 'EDIT_ROW',
 	DELETE_ROW = 'DELETE_ROW'
 
+let id = 1;
 
 export function addItem(item){
 	return{
 		type: ADD_ITEM, 
-		payload: item
+		id: id++, 
+		name: item[1], 
+		cost: item[2]
 	}
 }
 
@@ -36,8 +39,8 @@ export function editRow(id, newItem){
 	return{
 	type: EDIT_ROW,
 	payload: {
-	'id': id, 
-	'newItem': newItem
+		'id' : id,
+		'newItem' : newItem
 }
 }
 }
