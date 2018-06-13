@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_ITEM, ADD_ROW, ROW_ADDED, DELETE_ROW, START_EDIT, EDIT_ROW, UNDO, REDO, REBUILD_TABLE, TABLE_REBUILT, SHOW_SAVED } from '../actions'
+import { ADD_ITEM, ADD_ROW, ROW_ADDED, DELETE_ITEM, START_ITEM_EDIT, EDIT_ITEM, UNDO, REDO, REBUILD_TABLE, TABLE_REBUILT, SHOW_SAVED_TABLE } from '../actions'
 
 const initialState = {
 	items: {
@@ -10,7 +10,8 @@ const initialState = {
 	addingRow: false,
 	editingId: null, 
 	rebuildTable: false,
-	rebuiltTableIds: []
+	rebuiltTableIds: [],
+	tableShown: false
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -27,9 +28,9 @@ const rootReducer = (state = initialState, action) => {
 			return {...state, addingRow: true}
 		case ROW_ADDED: 
 			return {...state, addingRow: false}
-		case START_EDIT: 
+		case START_ITEM_EDIT: 
 			return {...state, editingId: action.payload}
-		case EDIT_ROW: 
+		case EDIT_ITEM: 
 			const presentItemsEdited = state.items.present.map((i, k) =>{
 				if (k == action.payload.id) return action.payload.newItem;
 				return i;
@@ -39,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
 				present: presentItemsEdited, 
 				future: []
 			}, editingId: null}
-		case DELETE_ROW: 
+		case DELETE_ITEM: 
 			const presentItemsDeleted = state.items.present.filter((i,k) => k != action.payload);
 			return {...state, items: {...state.items, 
 				past: [...state.items.past, [...state.items.present]], 
@@ -60,14 +61,13 @@ const rootReducer = (state = initialState, action) => {
 				past: [...state.items.past, [...state.items.present]],
 				present: [...state.items.future[0]],
 				future: state.items.future.slice(1)
-
 			}}
 		case REBUILD_TABLE: 
 			return {...state, rebuildTable: true}
 		case TABLE_REBUILT: 
 			return {...state, rebuildTable: false}
-		case SHOW_SAVED: 
-			return {...state, rebuiltTableIds: [...state.rebuiltTableIds, action.payload]}
+		case SHOW_SAVED_TABLE: 
+			return {...state, rebuiltTableIds: [...state.rebuiltTableIds, action.payload], tableShown: true}
 		default: 
 			return state
 	}

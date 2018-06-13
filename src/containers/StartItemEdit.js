@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { startEdit } from '../actions'
+import { startItemEdit } from '../actions'
 
-const StartEdit = ({ dispatch }) => {
+const StartItemEdit = ({ dispatch }) => {
 	return(
 		<a className='edit-item' href="" onClick={(e)=>{
 			e.preventDefault()
 			let id = e.currentTarget.parentElement.parentElement.id
-			dispatch(startEdit(id))
+			dispatch(startItemEdit(id))
 		}}>edit</a>
 
 	)
 }
 
-export default connect()(StartEdit)
+export default connect()(StartItemEdit)

@@ -33,7 +33,7 @@
 background-color: #6c92dd;
 }
 
-.table{
+.table, .rebuilt-table, .saved-table{
 border: solid black 1px;
 border-collapse: collapse;
 background-color: #b3daef;
@@ -68,14 +68,17 @@ a{
 .rebuilt-table{
   margin-top: 50px;
   float: right;
-  border: solid black 1px;
-border-collapse: collapse;
-background-color: #b3daef;
-width: 300px;
+  width: 300px;
 
 }
 
-.rebuilt-table td{
+.rebuilt-table td, .saved-table td{
   width: 250px;
   border: solid black 1px;
+}
+
+.saved-table{
+  width: 300px;
+  float: right;
+  margin-top: 300px;
 }

@@ -1,21 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux';
-import { tableRebuilt } from '../actions'
-import { showSaved } from '../actions'
-
-
 
 class SavedTable extends React.Component{
 	constructor(props){
 	super(props)
 }
 
-
-
 render(){
 let ids = this.props.ids[0]; 
 let items = this.props.items; 
-console.log(ids, items)
 let newItems = [];
 for(let i=0; i< ids.length; i++){
     newItems.push(items[+ids[i]])
@@ -29,10 +21,10 @@ for(let i=0; i< ids.length; i++){
       </tr>
     })
    
-    return (<div><table className='table'><tr><td>Item</td><td>Cost</td></tr>{newItemsShown}</table></div>)
+    return (<div><table className='saved-table'><tr><td>Item</td><td>Cost</td></tr>{newItemsShown}</table></div>)
 
 }
 }
 
 
-export default connect()(SavedTable)
+export default SavedTable
