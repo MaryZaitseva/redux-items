@@ -3,9 +3,14 @@ export const ADD_ITEM = "ADD_ITEM",
 	ROW_ADDED = 'ROW_ADDED',
 	START_EDIT = 'START_EDIT',
 	EDIT_ROW = 'EDIT_ROW',
-	DELETE_ROW = 'DELETE_ROW'
+	DELETE_ROW = 'DELETE_ROW',
+	UNDO = 'UNDO',
+	REDO = 'REDO', 
+	REBUILD_TABLE = 'REBUILD_TABLE', 
+	TABLE_REBUILT = 'TABLE_REBUILTV',
+	SHOW_SAVED = 'SHOW_SAVED'
 
-let id = 1;
+let id = 0;
 
 export function addItem(item){
 	return{
@@ -49,5 +54,36 @@ export function deleteRow(id){
 	return{
 	type: DELETE_ROW, 
 	payload: id
+}
+}
+
+export function undo(){
+	return{
+		type: UNDO
+	}
+}
+
+export function redo(){
+	return{
+		type: REDO
+	}
+}
+
+export function rebuildTable(){
+	return{
+		type: REBUILD_TABLE
+	}
+}
+
+export function tableRebuilt(){
+	return{
+	type: TABLE_REBUILT
+}
+}
+
+export function showSaved(ids){
+	return{
+	type: SHOW_SAVED, 
+	payload: ids
 }
 }

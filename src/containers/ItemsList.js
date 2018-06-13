@@ -21,7 +21,7 @@ class ItemsList extends React.Component{
   }
 
 render(){
-console.log(this.props.items)
+
   let items = this.props.items.map((item, index) => {
     if (parseInt(this.props.editingId) === index){
         return <EditRow editingId = {this.props.editingId}/>

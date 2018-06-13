@@ -64,3 +64,18 @@ button{
 a{
   margin-left: 20px;
 }
+
+.rebuilt-table{
+  margin-top: 50px;
+  float: right;
+  border: solid black 1px;
+border-collapse: collapse;
+background-color: #b3daef;
+width: 300px;
+
+}
+
+.rebuilt-table td{
+  width: 250px;
+  border: solid black 1px;
+}
