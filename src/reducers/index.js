@@ -8,9 +8,11 @@ const initialState = {
 		future: []
 	},
 	addingRow: false,
-	editingId: null, 
+	editingId: false, 
+
 	rebuildTable: false,
 	rebuiltTableIds: [],
+	
 	tableShown: false
 }
 
