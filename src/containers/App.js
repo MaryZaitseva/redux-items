@@ -13,11 +13,15 @@ class App extends Component {
   render() {
   	return <div>
   		{this.props.tableShown ? '' : <MainTable items={this.props.items} editingId={this.props.editingId} />}
-  		<AddRow />
+
+  		{this.props.rebuildTable || this.props.tableShown ? ' ' : <AddRow />}
   		{this.props.addingRow ? <AddItem/> : ''}
+
       <UndoRedo isUndoDisabled={this.props.isUndoDisabled} isRedoDisabled={this.props.isRedoDisabled}/>
-      <Rebuild />
+
+      {this.props.items.length > 0 && !this.props.tableShown ? <Rebuild /> : ''}
       {this.props.rebuildTable && !this.props.tableShown ? <RebuiltTable items={this.props.items}/> : ''}
+
       {this.props.rebuiltTableIds.length === 0 ? ' ' : <SavedTable ids = {this.props.rebuiltTableIds} items={this.props.items}/>}
   	</div>
   }
