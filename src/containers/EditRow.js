@@ -25,7 +25,6 @@ let itemInput,
 }
 }
 
-
 export default connect()(EditRow)
 
 

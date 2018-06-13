@@ -26,12 +26,15 @@ console.log(this.props.items)
     if (parseInt(this.props.editingId) === index){
         return <EditRow editingId = {this.props.editingId}/>
     } else {
-      return <tr onMouseOut={(e) => this.mouseOut(e)} onMouseOver={(e) => this.mouseOver(e)} id={index} key={index}><td>{item[1]}</td><td>{item[2]}</td>{item[0] === 0 ? ' ' : <td className = "hidden"><DeleteRow/><StartEdit /></td>}</tr>
+      return <tr onMouseOut={(e) => this.mouseOut(e)} onMouseOver={(e) => this.mouseOver(e)} id={index} key={index}><td>{item[1]}</td>
+        <td>{item[2]}</td>
+        <td className = "hidden"><DeleteRow/><StartEdit /></td>
+      </tr>
     }
 
 
 })
-    return <table className="table">{items}</table>
+    return <table className="table"><tr><td>Item</td><td>Cost</td></tr>{items}</table>
 }
 	
 }

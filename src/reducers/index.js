@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { ADD_ITEM, ADD_ROW, ROW_ADDED, DELETE_ROW, START_EDIT, EDIT_ROW } from '../actions'
 
 const initialState = {
-	items: [[ 0 , 'Item', 'Cost']],
+	items: [],
 	addingRow: false,
 	editingId: null
 }
