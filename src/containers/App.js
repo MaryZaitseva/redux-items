@@ -17,7 +17,7 @@ class App extends Component {
   		{this.props.rebuildTable || this.props.tableShown ? ' ' : <AddRow />}
   		{this.props.addingRow ? <AddItem/> : ''}
 
-      <UndoRedo isUndoDisabled={this.props.isUndoDisabled} isRedoDisabled={this.props.isRedoDisabled}/>
+      {!this.props.rebuildTable && !this.props.tableShown ? <UndoRedo isUndoDisabled={this.props.isUndoDisabled} isRedoDisabled={this.props.isRedoDisabled}/> : ''}
 
       {this.props.items.length > 0 && !this.props.tableShown && !this.props.rebuildTable ? <Rebuild /> : ''}
       {this.props.rebuildTable && !this.props.tableShown ? <RebuiltTable items={this.props.items}/> : ''}
