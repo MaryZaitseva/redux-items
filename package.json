@@ -14,14 +14,15 @@
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject", 
-    "client+server" : "concurrently \"npm run start\" \"nodemon server\""
+    "eject": "react-scripts eject",
+    "client+server": "concurrently \"npm run start\" \"nodemon server\""
   },
   "proxy": "http://localhost:5000/"
 }

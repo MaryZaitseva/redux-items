@@ -8,8 +8,14 @@ import RebuiltTable from './RebuiltTable'
 import SavedTable from '../components/SavedTable'
 import Rebuild from './Rebuild'
 import '../App.css';
+import io from "socket.io-client"
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    let socket = io.connect("http://localhost:5000")
+    console.dir(socket)
+  }
   render() {
   	return <div>
   		{this.props.tableShown ? '' : <MainTable items={this.props.items} editingId={this.props.editingId} />}
