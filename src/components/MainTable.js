@@ -34,7 +34,7 @@ render(){
 
 
 })
-    return <table className="table"><tr><td>Item</td><td>Cost</td></tr>{items}</table>
+    return <table className="table"><tbody><tr><td>Item</td><td>Cost</td></tr>{items}</tbody></table>
 }
 	
 }
