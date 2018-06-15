@@ -4,9 +4,6 @@ import { undo } from '../actions'
 import { redo } from '../actions'
 
 class UndoRedo extends React.Component{
-	constructor(props){
-	super(props)
-	}
 
 render(){
 

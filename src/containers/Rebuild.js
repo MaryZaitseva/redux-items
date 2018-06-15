@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { rebuildTable } from '../actions'
 
 class Rebuild extends React.Component{
-	constructor(props){
-	super(props)
-	}
+
 
 render(){
 	return(

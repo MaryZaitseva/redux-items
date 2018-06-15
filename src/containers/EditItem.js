@@ -3,9 +3,6 @@ import { connect } from 'react-redux'
 import { editItem } from '../actions'
 
 class EditRow extends React.Component{
-	constructor(props){
-	super(props)
-	}
 
 render(){
 

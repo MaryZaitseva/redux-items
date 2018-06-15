@@ -1,9 +1,7 @@
 import React from 'react'
 
 class SavedTable extends React.Component{
-	constructor(props){
-	super(props)
-}
+
 
 render(){
 let ids = this.props.ids[0]; 

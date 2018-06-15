@@ -5,15 +5,14 @@ import { rowAdded } from '../actions'
 
 const AddItem = ({ dispatch }) => {
 	let itemInput, costInput;
-	let id = 0;
 	return(
 		<div>
-			<input type="text" ref={node => itemInput = node}/>
+			<input type="text" ref={node => itemInput = node} />
 			<input type="text" ref={node => costInput = node}/>
 			<button onClick = { e=> {
 				e.preventDefault();
 				if(itemInput.value){
-					dispatch(addItem([, itemInput.value, costInput.value]));
+					dispatch(addItem([ null ,itemInput.value, costInput.value]));
 					dispatch(rowAdded())
 					itemInput.value = '';
 					costInput.value = ''

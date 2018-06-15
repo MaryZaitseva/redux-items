@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import { ADD_ITEM, ADD_ROW, ROW_ADDED, DELETE_ITEM, START_ITEM_EDIT, EDIT_ITEM, UNDO, REDO, REBUILD_TABLE, TABLE_REBUILT, SHOW_SAVED_TABLE } from '../actions'
 
 const initialState = {
@@ -34,7 +33,7 @@ const rootReducer = (state = initialState, action) => {
 			return {...state, editingId: action.payload}
 		case EDIT_ITEM: 
 			const presentItemsEdited = state.items.present.map((i, k) =>{
-				if (k == action.payload.id) return action.payload.newItem;
+				if (k === +action.payload.id) return action.payload.newItem;
 				return i;
 			});
 			return {...state, items: {...state.items, 
@@ -43,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
 				future: []
 			}, editingId: null}
 		case DELETE_ITEM: 
-			const presentItemsDeleted = state.items.present.filter((i,k) => k != action.payload);
+			const presentItemsDeleted = state.items.present.filter((i,k) => k !== +action.payload);
 			return {...state, items: {...state.items, 
 				past: [...state.items.past, [...state.items.present]], 
 				present: presentItemsDeleted, 

@@ -5,10 +5,6 @@ import EditItem from '../containers/EditItem'
 
 
 class MainTable extends React.Component{
-  
-  constructor(props){
-	super(props)
-  }
 
  mouseOut(e) {
     e.currentTarget.className = ""
@@ -23,7 +19,7 @@ class MainTable extends React.Component{
 render(){
 
   let items = this.props.items.map((item, index) => {
-    if (parseInt(this.props.editingId) === index){
+    if (parseInt(this.props.editingId, 10) === index){
         return <EditItem editingId = {this.props.editingId}/>
     } else {
       return <tr onMouseOut={(e) => this.mouseOut(e)} onMouseOver={(e) => this.mouseOver(e)} id={index} key={index}><td>{item[1]}</td>
