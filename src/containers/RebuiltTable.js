@@ -45,7 +45,7 @@ render(){
         <td>{item[2]}</td>
       </tr>
     })
-    return <div><table onLoad={this.handleLoad} className='rebuilt-table' ><tr><td></td><td>Item</td><td>Cost</td></tr>{items}</table><button onClick={this.handleSave}>Save new table with selected rows </button></div>
+    return <div><table onLoad={this.handleLoad} className='rebuilt-table'><tbody><tr><td></td><td>Item</td><td>Cost</td></tr>{items}</tbody></table><button onClick={this.handleSave}>Save new table with selected rows </button></div>
 }
 	
 }

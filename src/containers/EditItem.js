@@ -15,6 +15,8 @@ render(){
 			</td>
 			<td>
 				<input type="text" ref={node => costInput = node}/>
+			</td>
+			<td>
 				<button onClick = { e => {
 					e.preventDefault();
 					if(itemInput.value){

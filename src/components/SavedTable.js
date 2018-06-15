@@ -19,7 +19,7 @@ for(let i=0; i< ids.length; i++){
       </tr>
     })
    
-    return (<div><table className='saved-table'><tr><td>Item</td><td>Cost</td></tr>{newItemsShown}</table></div>)
+    return (<div><table className='saved-table'><tbody><tr><td>Item</td><td>Cost</td></tr>{newItemsShown}</tbody></table></div>)
 
 }
 }
