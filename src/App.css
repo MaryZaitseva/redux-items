@@ -30,23 +30,28 @@
 
 .hovered{
 
-background-color: #6c92dd;
+background-color: #B48EAD;
 }
 
 .table, .rebuilt-table, .saved-table{
 border: solid black 1px;
 border-collapse: collapse;
-background-color: #b3daef;
+
+}
+
+.table{
+background-color: #BF616A;
 }
 
 .table td{
-  width: 250px;
+  width: 150px;
   border: solid black 1px;
 }
 
-input{
- width: 250px; 
- background-color: #b3daef;
+input[type="text"]{
+ width: 150px; 
+ background-color: #BF616A;
+ float: left;
 }
 
 button{
@@ -66,19 +71,24 @@ a{
 }
 
 .rebuilt-table{
-  margin-top: 50px;
-  float: right;
   width: 300px;
+  background-color: #D08770;
 
 }
 
 .rebuilt-table td, .saved-table td{
-  width: 250px;
   border: solid black 1px;
+}
+
+.rebuilt-table tr:first-child{
+  width: 10px;
 }
 
 .saved-table{
   width: 300px;
-  float: right;
-  margin-top: 300px;
+  background-color: #EBCB8B;
+}
+
+input[type="checkbox"]{
+  width: 10px;
 }

@@ -1,18 +1,17 @@
 export const
     ADD_ROW = 'ADD_ROW',
     ROW_ADDED = 'ROW_ADDED',
-
     ADD_ITEM = "ADD_ITEM",
     START_ITEM_EDIT = 'START_ITEM_EDIT',
     EDIT_ITEM = 'EDIT_ITEM',
     DELETE_ITEM = 'DELETE_ITEM',
-
     UNDO = 'UNDO',
     REDO = 'REDO',
-
     REBUILD_TABLE = 'REBUILD_TABLE',
     TABLE_REBUILT = 'TABLE_REBUILT',
-    SHOW_SAVED_TABLE = 'SHOW_SAVED_TABLE'
+    SHOW_SAVED_TABLE = 'SHOW_SAVED_TABLE', 
+    TABLE_SHOWN = 'TABLE_SHOWN', 
+    RESET_TABLE='RESET_TABLE';
 
 let id = 0;
 
@@ -89,5 +88,17 @@ export function showSaved(ids) {
     return {
         type: SHOW_SAVED_TABLE,
         payload: ids
+    }
+}
+
+export function tableShown(){
+    return{
+        type: TABLE_SHOWN
+    }
+}
+
+export function resetTable(){
+    return{
+        type: RESET_TABLE
     }
 }
