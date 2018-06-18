@@ -9,7 +9,7 @@ import SavedTable from '../components/SavedTable';
 import RebuildTable from '../components/RebuildTable';
 import RebuiltTable from '../components/RebuiltTable';
 import ResetTable from '../components/ResetTable';
-import { undo, redo, addRow, addItem, rowAdded, rebuildTable, deleteRow, editItem, tableRebuilt, showSaved, startItemEdit, tableShown, resetTable } from '../redux/actions';
+import { undo, redo, rowAdd, itemAdd, tableRebuild, itemDelete, itemEdit, tableRebuilt, tableSavedShow, itemEditStart, tableShown, tableReset } from '../redux/actions';
 
 
 class Home extends React.Component {
@@ -83,35 +83,34 @@ function mapDispatchToProps(dispatch){
             dispatch(redo());
         }, 
         onAddRowClick(){
-            dispatch(addRow());
+            dispatch(rowAdd());
         }, 
         onAddItemClick(item){
-            dispatch(addItem(item));
-            dispatch(rowAdded());
+            dispatch(itemAdd(item));
         },
         onRebuildClick(){
-            dispatch(rebuildTable());
+            dispatch(tableRebuild());
         },
         onEditClick(id, item){
-            dispatch(editItem(id, item));
+            dispatch(itemEdit(id, item));
         },
         onDeleteClick(id){
-            dispatch(deleteRow(id));
+            dispatch(itemDelete(id));
         },
         onTableRebuilt(){
             dispatch(tableRebuilt());
         }, 
         onShowSaved(ids){
-            dispatch(showSaved(ids));
+            dispatch(tableSavedShow(ids));
         },
         onStartEditClick(id){
-            dispatch(startItemEdit(id));
+            dispatch(itemEditStart(id));
         },
         onTableShown(){
             dispatch(tableShown());
         }, 
         onResetClick(){
-            dispatch(resetTable())
+            dispatch(tableReset())
         }
 
     }

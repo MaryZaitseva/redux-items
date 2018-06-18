@@ -1,15 +1,19 @@
-import { ADD_ITEM, 
-	ADD_ROW, 
-	ROW_ADDED, 
-	DELETE_ITEM, 
-	START_ITEM_EDIT, 
-	EDIT_ITEM, 
+import {
+	ITEM_ADD, 
+	ITEM_EDIT_START,
+	ITEM_EDIT, 
+	ITEM_DELETE,
+
+	ROW_ADD, 
+	
+	TABLE_REBUILD,
+	TABLE_REBUILT,
+	TABLE_SAVED_SHOW,
+	TABLE_RESET,
+
 	UNDO, 
 	REDO,
-	REBUILD_TABLE, 
-	TABLE_REBUILT, 
-	SHOW_SAVED_TABLE, 
-	RESET_TABLE } from '../actions';
+} from '../actions';
 
 const initialState = {
 	items: {
@@ -17,39 +21,38 @@ const initialState = {
 		present: [],
 		future: []
 	},
-	addingRow: false,
-	editingId: false, 
 	rebuildTable: {
 		past: [],
 		present: false, 
 		future: []
 	},
+	addingRow: false,
+	editingId: false, 
 	rebuiltTableIds: [],	
-	tableShown: false
+	tableShown: false,
 }
 
 const rootReducer = (state = initialState, action) => {
 	switch(action.type){
-		case ADD_ITEM: 
+		case ITEM_ADD: 
 			const present = [...state.items.present, [action.id, action.name, action.cost]]
 			return {...state, 
 				items: {...state.items, 
 					past: [...state.items.past, [...state.items.present]],
 					present: present, 
 					future: []
-					}
+					},
+				addingRow: false
 			}
-		case ADD_ROW: 
-			return {...state, addingRow: true}
-		case ROW_ADDED: 
-			return {...state, addingRow: false}
-		case START_ITEM_EDIT: 
+
+		case ITEM_EDIT_START: 
 			return {...state, editingId: action.payload}
-		case EDIT_ITEM: 
+
+		case ITEM_EDIT: 
 			const presentItemsEdited = state.items.present.map((i, k) =>{
 				if (k === +action.payload.id) return action.payload.newItem;
-				return i;
-			});
+					return i;
+				});
 			return {...state, 
 				items: {...state.items, 
 					past: [...state.items.past, [...state.items.present]], 
@@ -57,7 +60,10 @@ const rootReducer = (state = initialState, action) => {
 					future: []}, 
 				editingId: null
 			}
-		case DELETE_ITEM: 
+
+		case ROW_ADD: 
+			return {...state, addingRow: true}
+		case ITEM_DELETE: 
 			const presentItemsDeleted = state.items.present.filter((i,k) => k !== +action.payload);
 			return {...state, 
 				items: {...state.items, 
@@ -65,6 +71,7 @@ const rootReducer = (state = initialState, action) => {
 					present: presentItemsDeleted, 
 					future: []}
 			}
+
 		case UNDO: 
 			if(state.rebuildTable.past.length !== 0){
 				const lastState = state.rebuildTable.past[state.rebuildTable.past.length - 1];
@@ -88,7 +95,8 @@ const rootReducer = (state = initialState, action) => {
 						future
 					}
 				}
-			}			
+			}		
+
 		case REDO: 
 			if(state.rebuildTable.future.length !== 0 ){
 				return {...state, 
@@ -104,8 +112,9 @@ const rootReducer = (state = initialState, action) => {
 					present: state.items.future[0],
 					future: state.items.future.slice(1)
 				}}
-			}			
-		case REBUILD_TABLE: 
+			}	
+
+		case TABLE_REBUILD: 
 			return {...state, 
 				rebuildTable: {...state.rebuildTable, 
 					past: [...state.rebuildTable.past, state.rebuildTable.present],
@@ -113,6 +122,7 @@ const rootReducer = (state = initialState, action) => {
 					future: []
 				}
 			}
+
 		case TABLE_REBUILT: 
 			return {...state, 
 				rebuildTable: {...state.rebuildTable, 
@@ -121,13 +131,16 @@ const rootReducer = (state = initialState, action) => {
 					future: []
 				}
 			}
-		case SHOW_SAVED_TABLE: 
+		case TABLE_SAVED_SHOW: 
 			return {...state, 
 				tableShown: true, 
-				rebuiltTableIds: [...state.rebuiltTableIds, action.payload]
+				rebuiltTableIds: [...state.rebuiltTableIds, action.payload],
+
 			}
-		case RESET_TABLE: 
+
+		case TABLE_RESET: 
 			return initialState;
+
 		default: 
 			return state;
 	}

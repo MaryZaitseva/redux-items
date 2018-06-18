@@ -1,25 +1,31 @@
 import React from 'react';
 
 
-const AddItem = props => {
+class AddItem extends React.Component {
+	state = { item: {} };
 
-	let itemInput, 
-		costInput;
+	updateProp = ({ target: { value, name } }) => {
+	this.setState({ item: { ...this.state.item, [name]: value } });
+	}
 
-	return(
-		<div>
-			<input type='text' ref={node => itemInput = node}/>
-			<input type='text' ref={node => costInput = node}/>
-			<button style={{float: 'left'}} onClick = { e=> {
-				e.preventDefault();
-				if(itemInput.value){
-					props.onAddItemClick([null, itemInput.value, costInput.value])
-					itemInput.value = '';
-					costInput.value = '';
-				}
-			}}>Add Item</button>
-		</div>
-	)
+	submit = () => {
+		const { item } = this.state;
+
+		if (item.name && (item.cost || item.cost === 0)) {
+			this.props.onAddItemClick(item);
+			this.setState({ item: {} });
+		}
+	}
+
+	render() {
+		return (
+			<div>
+				<input type="text" name="name" onChange={this.updateProp} />
+				<input type="text" name="cost" onChange={this.updateProp} />
+				<button style={{ float: 'left' }} onClick={this.submit}>Add Item</button>
+			</div>
+		);
+	}
 }
 
 export default AddItem;

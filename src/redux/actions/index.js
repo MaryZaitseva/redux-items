@@ -1,51 +1,41 @@
-export const
-    ADD_ROW = 'ADD_ROW',
-    ROW_ADDED = 'ROW_ADDED',
-    ADD_ITEM = "ADD_ITEM",
-    START_ITEM_EDIT = 'START_ITEM_EDIT',
-    EDIT_ITEM = 'EDIT_ITEM',
-    DELETE_ITEM = 'DELETE_ITEM',
-    UNDO = 'UNDO',
-    REDO = 'REDO',
-    REBUILD_TABLE = 'REBUILD_TABLE',
-    TABLE_REBUILT = 'TABLE_REBUILT',
-    SHOW_SAVED_TABLE = 'SHOW_SAVED_TABLE', 
-    TABLE_SHOWN = 'TABLE_SHOWN', 
-    RESET_TABLE='RESET_TABLE';
+export const ITEM_ADD = 'ITEM_ADD';
+export const ITEM_EDIT_START = 'ITEM_EDIT_START';
+export const ITEM_EDIT = 'ITEM_EDIT';
+export const ITEM_DELETE = 'ITEM_DELETE';
+
+export const ROW_ADD = 'ROW_ADD';
+export const ROW_ADDED = 'ROW_ADDED';
+
+export const TABLE_REBUILD = 'TABLE_REBUILD';
+export const TABLE_REBUILT = 'TABLE_REBUILT';
+export const TABLE_SAVED_SHOW = 'TABLE_SAVED_SHOW';
+export const TABLE_RESET = 'TABLE_RESET';
+export const TABLE_SHOWN = 'TABLE_SHOWN';
+
+export const UNDO = 'UNDO';
+export const REDO = 'REDO';
 
 let id = 0;
 
-export function addRow() {
+export function itemAdd({name, cost}) {
     return {
-        type: ADD_ROW
-    }
-}
-
-export function rowAdded() {
-    return {
-        type: ROW_ADDED
-    }
-}
-
-export function addItem(item) {
-    return {
-        type: ADD_ITEM,
+        type: ITEM_ADD,
         id: id++,
-        name: item[1],
-        cost: item[2]
+        name,
+        cost
     }
 }
 
-export function startItemEdit(id) {
+export function itemEditStart(id) {
     return {
-        type: START_ITEM_EDIT,
+        type: ITEM_EDIT_START,
         payload: id
     }
 }
 
-export function editItem(id, newItem) {
+export function itemEdit(id, newItem) {
     return {
-        type: EDIT_ITEM,
+        type: ITEM_EDIT,
         payload: {
             'id': id,
             'newItem': newItem
@@ -53,10 +43,22 @@ export function editItem(id, newItem) {
     }
 }
 
-export function deleteRow(id) {
+export function itemDelete(id) {
     return {
-        type: DELETE_ITEM,
+        type: ITEM_DELETE,
         payload: id
+    }
+}
+
+export function rowAdd() {
+    return {
+        type: ROW_ADD
+    }
+}
+
+export function rowAdded() {
+    return {
+        type: ROW_ADDED
     }
 }
 
@@ -72,9 +74,9 @@ export function redo() {
     }
 }
 
-export function rebuildTable() {
+export function tableRebuild() {
     return {
-        type: REBUILD_TABLE
+        type: TABLE_REBUILD
     }
 }
 
@@ -84,9 +86,9 @@ export function tableRebuilt() {
     }
 }
 
-export function showSaved(ids) {
+export function tableSavedShow(ids) {
     return {
-        type: SHOW_SAVED_TABLE,
+        type: TABLE_SAVED_SHOW,
         payload: ids
     }
 }
@@ -97,8 +99,8 @@ export function tableShown(){
     }
 }
 
-export function resetTable(){
+export function tableReset(){
     return{
-        type: RESET_TABLE
+        type: TABLE_RESET
     }
 }
