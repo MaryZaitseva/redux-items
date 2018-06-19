@@ -16,14 +16,15 @@ class MainTable extends React.Component {
 
     return (
       <tr
-        onMouseOut={() => this.mouseOverOut(false)}
-        onMouseOver={() => this.mouseOverOut(index)}
+        onMouseEnter={() => this.mouseOverOut(index)}
+        onMouseLeave={() => this.mouseOverOut(false)}
         key={index}
         index={index}
       >
         <td>{items[index][1]}</td>
         <td>{items[index][2]}</td>
         {index === this.state.hoverIndex && <ChangeRow
+          index={index}
           onDeleteClick={onDeleteClick}
           onStartEditClick={onStartEditClick}
         />}
