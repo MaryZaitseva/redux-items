@@ -3,44 +3,47 @@ import ChangeRow from './ChangeRow';
 import EditItem from './EditItem';
 
 
-class MainTable extends React.Component{
+class MainTable extends React.Component {
 
-  mouseOut(e) {
-    e.currentTarget.className = "";
-    e.currentTarget.lastChild.className = "hidden";
+  state = { hoverIndex: false }
+
+  mouseOverOut = (index) => {
+    this.setState({ hoverIndex: index });
   }
 
-  mouseOver(e) {
-    e.currentTarget.className = "hovered";
-    e.currentTarget.lastChild.className = "";
+  renderItem(index) {
+    const {onDeleteClick, onStartEditClick, items } = this.props;
+
+    return (
+      <tr
+        onMouseOut={() => this.mouseOverOut(false)}
+        onMouseOver={() => this.mouseOverOut(index)}
+        key={index}
+        index={index}
+      >
+        <td>{items[index][1]}</td>
+        <td>{items[index][2]}</td>
+        {index === this.state.hoverIndex && <ChangeRow
+          onDeleteClick={onDeleteClick}
+          onStartEditClick={onStartEditClick}
+        />}
+      </tr>
+    );
   }
 
-  render(){
-    
-    let items = this.props.items.map((item, index) => {
+  renderItemEdit(index) {
+    const { editingId, onEditClick } = this.props;
 
-      if (parseInt(this.props.editingId, 10) === index){
-        return <EditItem 
-          key={index} 
-          editingId = {this.props.editingId} 
-          onEditClick={this.props.onEditClick}/>
-      } 
-      else {
-        return (
-          <tr 
-          onMouseOut={(e) => this.mouseOut(e)} 
-          onMouseOver={(e) => this.mouseOver(e)} 
-          id={index} 
-          key={index}>
-            <td>{item[1]}</td>
-            <td>{item[2]}</td>
-            <ChangeRow 
-              onDeleteClick={this.props.onDeleteClick} 
-              onStartEditClick={this.props.onStartEditClick}/>
-          </tr>
-        )
-      }
-    })
+    return (
+      <EditItem
+        key={index}
+        editingId={editingId}
+        onEditClick={onEditClick} />
+    );
+  }
+
+  render() {
+    const { editingId, items } = this.props;
 
     return (
       <table className="table"><tbody>
@@ -48,10 +51,12 @@ class MainTable extends React.Component{
           <td>Item</td>
           <td>Cost</td>
         </tr>
-        {items}
+        {items.map((item, index) =>
+          editingId === index ? this.renderItemEdit(index) : this.renderItem(index)
+        )}
       </tbody></table>
     )
-  } 
+  }
 }
 
 export default MainTable;

@@ -17,38 +17,43 @@ import { undo, redo,
 class Home extends React.Component {
 
   render() {
+    const { isTableShown, isTableReduilding, items, editingId, onEditClick, onDeleteClick, 
+      onStartEditClick, onAddRowClick, isRowAdding, onAddItemClick, onUndoClick, onRedoClick, 
+      isUndoDisabled, isRedoDisabled, onTableRebuilt, onShowSaved, rebuiltTableIds, onResetClick,
+      onRebuildClick,
+    } = this.props
     return (
       <div>
-        {this.props.isTableShown || this.props.isTableReduilding ||
+        {(isTableShown || isTableReduilding) ||
           <MainTable 
-            items={this.props.items} 
-            editingId={this.props.editingId} 
-            onEditClick={this.props.onEditClick} 
-            onDeleteClick={this.props.onDeleteClick} 
-            onStartEditClick={this.props.onStartEditClick}/>}
-        {this.props.isTableReduilding || this.props.isTableShown || 
-          <AddRow onAddRowClick={this.props.onAddRowClick}/>}
-        {this.props.isRowAdding &&
-          <AddItem onAddItemClick={this.props.onAddItemClick}/>}
-        {!this.props.isTableShown &&
+            items={items} 
+            editingId={editingId} 
+            onEditClick={onEditClick} 
+            onDeleteClick={onDeleteClick} 
+            onStartEditClick={onStartEditClick}/>}
+        {isTableReduilding || isTableShown || 
+          <AddRow onAddRowClick={onAddRowClick}/>}
+        {isRowAdding &&
+          <AddItem onAddItemClick={onAddItemClick}/>}
+        {!isTableShown &&
           <UndoRedo 
-            onUndoClick={this.props.onUndoClick} 
-            onRedoClick={this.props.onRedoClick} 
-            isUndoDisabled={this.props.isUndoDisabled} 
-            isRedoDisabled={this.props.isRedoDisabled}/>}
-        {this.props.items.length > 0 && !this.props.isTableShown && !this.props.isTableReduilding &&
-          <RebuildTable onRebuildClick={this.props.onRebuildClick}/>}
-        {this.props.isTableReduilding && !this.props.isTableShown &&
+            onUndoClick={onUndoClick} 
+            onRedoClick={onRedoClick} 
+            isUndoDisabled={isUndoDisabled} 
+            isRedoDisabled={isRedoDisabled}/>}
+        {items.length > 0 && !isTableShown && !isTableReduilding &&
+          <RebuildTable onRebuildClick={onRebuildClick}/>}
+        {isTableReduilding && !isTableShown &&
           <RebuiltTable 
-            items={this.props.items} 
-            onTableRebuilt={this.props.onTableRebuilt} 
-            onShowSaved={this.props.onShowSaved}/>}
-        {this.props.rebuiltTableIds.length > 0 && 
+            items={items} 
+            onTableRebuilt={onTableRebuilt} 
+            onShowSaved={onShowSaved}/>}
+        {rebuiltTableIds.length > 0 && 
           <div>
             <SavedTable 
-              ids = {this.props.rebuiltTableIds} 
-              items={this.props.items}/>
-            <ResetTable onResetClick={this.props.onResetClick}/>
+              ids = {rebuiltTableIds} 
+              items={items}/>
+            <ResetTable onResetClick={onResetClick}/>
           </div>}
       </div>
     )

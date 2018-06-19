@@ -5,19 +5,23 @@ class ChangeRow extends React.Component {
 
 	handleDeleteClick = (e) => {
 		e.preventDefault();
-		let id = e.currentTarget.parentElement.parentElement.id;
-		this.props.onDeleteClick(id);
+
+		const { onDeleteClick, index } = this.props;
+
+		onDeleteClick(index);
 	}
 
 	handleEditClick = (e) => {
 		e.preventDefault();
-		let id = e.currentTarget.parentElement.parentElement.id;
-		this.props.onStartEditClick(id);
+
+		const { onStartEditClick, index } = this.props;
+
+		onStartEditClick(index);
 	}
 
-	render(){
-		return(
-			<td className = "hidden">
+	render() {
+		return (
+			<td>
 				<a onClick={this.handleDeleteClick} href="">x</a>
 				<a onClick={this.handleEditClick} href="">edit</a>
 			</td>
