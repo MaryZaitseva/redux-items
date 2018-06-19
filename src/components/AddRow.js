@@ -1,15 +1,20 @@
 import React from 'react';
 
 
-const AddRow = (props) => {
-	return(
-		<div>
-			<button className='add-row-button' onClick = {e => {
-				e.preventDefault();
-				props.onAddRowClick();
-			}}>Add Row</button>
-		</div>
-	)
+class AddRow extends React.Component{
+
+	handleClick = () => {
+		this.props.onAddRowClick();
+	}
+
+	render(){
+		return(
+			<div>
+				<button onClick={this.handleClick}>Add Row</button>
+			</div>
+		)
+	}
+
 }
 
 export default AddRow;                     

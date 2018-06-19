@@ -1,25 +1,33 @@
 import React from 'react';
 
 
-const UndoRedo = props => {
-	return(
-		<div>
-			<button onClick = { e => {
-				e.preventDefault();
-				props.onUndoClick()
-				}}
-				disabled = {props.isUndoDisabled}>
-				Undo
-			</button>
-			<button onClick = { e => {
-				e.preventDefault();
-				props.onRedoClick()
-				}} 
-				disabled = {props.isRedoDisabled}>
-				Redo
-			</button>
-		</div>
-	)
+class UndoRedo extends React.Component{
+
+	handleUndoClick = () => {
+		this.props.onUndoClick();
+	}
+
+	handleRedoClick = () => {
+		this.props.onRedoClick();
+	}
+
+	render(){
+		return(
+			<div>
+				<button 
+					onClick = {this.handleUndoClick}
+					disabled = {this.props.isUndoDisabled}>
+					Undo
+				</button>
+
+				<button 
+					onClick = {this.handleRedoClick} 
+					disabled = {this.props.isRedoDisabled}>
+					Redo
+				</button>
+			</div>
+		)
+	}
 }
 
 export default UndoRedo;

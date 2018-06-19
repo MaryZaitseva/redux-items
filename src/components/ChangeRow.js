@@ -1,21 +1,28 @@
 import React from 'react';
 
 
-const ChangeRow = props => {
-	return(
-		<td className = "hidden">
-			<a onClick={(e)=>{
-				e.preventDefault();
-				let id = e.currentTarget.parentElement.parentElement.id;
-				props.onDeleteClick(id);
-			}} className='delete-item' href="">x</a>
-			<a className='edit-item' href="" onClick={(e)=>{
-				e.preventDefault();
-				let id = e.currentTarget.parentElement.parentElement.id;
-				props.onStartEditClick(id);
-			}}>edit</a>
-		</td>
-	)
+class ChangeRow extends React.Component {
+
+	handleDeleteClick = (e) => {
+		e.preventDefault();
+		let id = e.currentTarget.parentElement.parentElement.id;
+		this.props.onDeleteClick(id);
+	}
+
+	handleEditClick = (e) => {
+		e.preventDefault();
+		let id = e.currentTarget.parentElement.parentElement.id;
+		this.props.onStartEditClick(id);
+	}
+
+	render(){
+		return(
+			<td className = "hidden">
+				<a onClick={this.handleDeleteClick} href="">x</a>
+				<a onClick={this.handleEditClick} href="">edit</a>
+			</td>
+		)
+	}
 }
 
 export default ChangeRow;

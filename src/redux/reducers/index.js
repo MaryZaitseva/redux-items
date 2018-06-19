@@ -13,7 +13,7 @@ import {
 
 	UNDO, 
 	REDO,
-} from '../actions';
+} from '../constants';
 
 const initialState = {
 	items: {
@@ -21,15 +21,15 @@ const initialState = {
 		present: [],
 		future: []
 	},
-	rebuildTable: {
+	isTableReduilding: {
 		past: [],
 		present: false, 
 		future: []
 	},
-	addingRow: false,
-	editingId: false, 
+	isRowAdding: false,
+	editingId: null, 
 	rebuiltTableIds: [],	
-	tableShown: false,
+	isTableShown: false,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -42,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
 					present: present, 
 					future: []
 					},
-				addingRow: false
+				isRowAdding: false
 			}
 
 		case ITEM_EDIT_START: 
@@ -50,7 +50,7 @@ const rootReducer = (state = initialState, action) => {
 
 		case ITEM_EDIT: 
 			const presentItemsEdited = state.items.present.map((i, k) =>{
-				if (k === +action.payload.id) return action.payload.newItem;
+				if (k === +action.id) return [action.id, action.name, action.cost];
 					return i;
 				});
 			return {...state, 
@@ -62,7 +62,7 @@ const rootReducer = (state = initialState, action) => {
 			}
 
 		case ROW_ADD: 
-			return {...state, addingRow: true}
+			return {...state, isRowAdding: true}
 		case ITEM_DELETE: 
 			const presentItemsDeleted = state.items.present.filter((i,k) => k !== +action.payload);
 			return {...state, 
@@ -73,12 +73,12 @@ const rootReducer = (state = initialState, action) => {
 			}
 
 		case UNDO: 
-			if(state.rebuildTable.past.length !== 0){
-				const lastState = state.rebuildTable.past[state.rebuildTable.past.length - 1];
-				const past = state.rebuildTable.past.slice(0, state.rebuildTable.past.length - 1);
-				const future = [state.rebuildTable.present, ...state.rebuildTable.future];
+			if(state.isTableReduilding.past.length !== 0){
+				const lastState = state.isTableReduilding.past[state.isTableReduilding.past.length - 1];
+				const past = state.isTableReduilding.past.slice(0, state.isTableReduilding.past.length - 1);
+				const future = [state.isTableReduilding.present, ...state.isTableReduilding.future];
 				return{...state, 
-					rebuildTable: {...state.rebuildTable, 
+					isTableReduilding: {...state.isTableReduilding, 
 						past,
 						present: lastState,
 						future
@@ -98,15 +98,16 @@ const rootReducer = (state = initialState, action) => {
 			}		
 
 		case REDO: 
-			if(state.rebuildTable.future.length !== 0 ){
+			if(state.isTableReduilding.future.length !== 0 ){
 				return {...state, 
-					rebuildTable: {...state.rebuildTable, 
-						past: [...state.rebuildTable.past, state.rebuildTable.present],
-						present: state.rebuildTable.future[0],
-						future: state.rebuildTable.future.slice(1)
+					isTableReduilding: {...state.isTableReduilding, 
+						past: [...state.isTableReduilding.past, state.isTableReduilding.present],
+						present: state.isTableReduilding.future[0],
+						future: state.isTableReduilding.future.slice(1)
 					}
 				}
-			}else{
+			}
+			else{
 				return {...state, items: {...state.items, 
 					past: [...state.items.past, [...state.items.present]],
 					present: state.items.future[0],
@@ -116,8 +117,8 @@ const rootReducer = (state = initialState, action) => {
 
 		case TABLE_REBUILD: 
 			return {...state, 
-				rebuildTable: {...state.rebuildTable, 
-					past: [...state.rebuildTable.past, state.rebuildTable.present],
+				isTableReduilding: {...state.isTableReduilding, 
+					past: [...state.isTableReduilding.past, state.isTableReduilding.present],
 					present: true, 
 					future: []
 				}
@@ -125,17 +126,17 @@ const rootReducer = (state = initialState, action) => {
 
 		case TABLE_REBUILT: 
 			return {...state, 
-				rebuildTable: {...state.rebuildTable, 
-					past: [...state.rebuildTable.past, state.rebuildTable.present],
+				isTableReduilding: {...state.isTableReduilding, 
+					past: [...state.isTableReduilding.past, state.isTableReduilding.present],
 					present: false, 
 					future: []
 				}
 			}
+			
 		case TABLE_SAVED_SHOW: 
 			return {...state, 
-				tableShown: true, 
+				isTableShown: true, 
 				rebuiltTableIds: [...state.rebuiltTableIds, action.payload],
-
 			}
 
 		case TABLE_RESET: 

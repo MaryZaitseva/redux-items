@@ -1,17 +1,19 @@
 import React from 'react';
 
 
-const ResetTable = props => {
-	return(
-		<div>
-			<button onClick = { e => {
-				e.preventDefault();
-				props.onResetClick();
-				}}>
-				Reset Table 
-			</button>
-		</div>
-	)
+class ResetTable extends React.Component{
+
+	handleClick = () => {
+		this.props.onResetClick();
+	}
+
+	render(){
+		return(
+			<div>
+				<button onClick = {this.handleClick}>Reset Table</button>
+			</div>
+		)
+	}
 }
 
 export default ResetTable;

@@ -1,34 +1,39 @@
 import React from 'react';
 
 
-const EditItem = props => {
+class EditItem extends React.Component{
+	state = { item: {} };
 
-	let itemInput, 
-		costInput, 
-		id = props.editingId;
+	updateProp = ({ target: { value, name } }) => {
+		this.setState({ item: { ...this.state.item, [name]: value } });
+	}
 
-	return(
+	submit = () => {
+		const { item } = this.state;
+
+		if (item.name) {
+			this.props.onEditClick(this.props.editingId, item);
+			this.setState({ item: {} });
+		}
+	}
+
+	render(){
+		return(
 		<tr>
 			<td>
-				<input type="text" ref={node => itemInput = node}/>
+				<input type="text" name="name" onChange={this.updateProp}/>
 			</td>
 			<td>
-				<input type="text" ref={node => costInput = node}/>
+				<input type="text" name="cost" onChange={this.updateProp}/>
 			</td>
 			<td>
-				<button onClick = { e => {
-					e.preventDefault();
-					if(itemInput.value){
-						props.onEditClick(id, [id, itemInput.value, costInput.value])
-					}}}>	
-					Edit Item
-				</button>
+				<button onClick={this.submit}>Edit Item</button>
 			</td>
 		</tr>
 	)
+	}
 }
 
 export default EditItem;
 
 
-			

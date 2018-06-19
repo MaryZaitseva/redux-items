@@ -1,15 +1,20 @@
 import React from 'react';
 
 
-const RebuildTable = props => {
-	return(
-		<div>
-			<button onClick = { e => {
-				e.preventDefault();
-				props.onRebuildClick();
-			}}>Rebuild Table</button>
-		</div>
-	)
+class RebuildTable extends React.Component{
+	
+	handleClick = () => {
+		this.props.onRebuildClick();
+	}
+
+	render(){
+
+		return(
+			<div>
+				<button onClick = {this.handleClick}>Rebuild Table</button>
+			</div>
+		)
+	}
 }
 
 export default RebuildTable;
