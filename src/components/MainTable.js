@@ -13,23 +13,24 @@ class MainTable extends React.Component {
 
   renderItem(index) {
     const {onDeleteClick, onStartEditClick, items } = this.props;
+    const isHovered = index === this.state.hoverIndex;
 
     return (
-      <tr
+      <tr 
         onMouseEnter={() => this.mouseOverOut(index)}
         onMouseLeave={() => this.mouseOverOut(false)}
         key={index}
         index={index}
-      >
-        <td>{items[index][1]}</td>
-        <td>{items[index][2]}</td>
-        {index === this.state.hoverIndex && <ChangeRow
+        className={isHovered ? "hovered" : ''}>
+        <td>{items[index].name}</td>
+        <td>{items[index].cost}</td>
+        {isHovered &&  <ChangeRow
           index={index}
           onDeleteClick={onDeleteClick}
           onStartEditClick={onStartEditClick}
         />}
       </tr>
-    );
+    )
   }
 
   renderItemEdit(index) {
@@ -40,7 +41,7 @@ class MainTable extends React.Component {
         key={index}
         editingId={editingId}
         onEditClick={onEditClick} />
-    );
+    )
   }
 
   render() {

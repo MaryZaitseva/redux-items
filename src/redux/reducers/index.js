@@ -35,7 +35,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
 	switch(action.type){
 		case ITEM_ADD: 
-			const present = [...state.items.present, [action.id, action.name, action.cost]]
+			const present = [...state.items.present, {id: action.id, name: action.name, cost: action.cost }]
 			return {...state, 
 				items: {...state.items, 
 					past: [...state.items.past, [...state.items.present]],
@@ -50,8 +50,8 @@ const rootReducer = (state = initialState, action) => {
 
 		case ITEM_EDIT: 
 			const presentItemsEdited = state.items.present.map((i, k) =>{
-				if (k === +action.id) return [action.id, action.name, action.cost];
-					return i;
+				if (k === +action.id) return {id: action.id, name: action.name, cost: action.cost };
+				else return i;
 				});
 			return {...state, 
 				items: {...state.items, 

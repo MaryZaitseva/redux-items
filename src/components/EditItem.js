@@ -21,10 +21,10 @@ class EditItem extends React.Component{
 		return(
 		<tr>
 			<td>
-				<input type="text" name="name" onChange={this.updateProp}/>
+				<input type="text" name="name" value={this.props.nameValue} onChange={this.updateProp}/>
 			</td>
 			<td>
-				<input type="text" name="cost" onChange={this.updateProp}/>
+				<input type="text" name="cost" value={this.props.costValue} onChange={this.updateProp}/>
 			</td>
 			<td>
 				<button onClick={this.submit}>Edit Item</button>

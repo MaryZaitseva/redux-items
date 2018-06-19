@@ -1,4 +1,4 @@
-import '../App.css';
+import '../styles.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import AddRow from '../components/AddRow';
