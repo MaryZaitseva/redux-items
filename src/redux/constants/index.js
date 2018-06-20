@@ -9,7 +9,8 @@ export const ROW_ADDED = 'ROW_ADDED';
 export const TABLE_REBUILD = 'TABLE_REBUILD';
 export const TABLE_REBUILT = 'TABLE_REBUILT';
 export const TABLE_SAVED_SHOW = 'TABLE_SAVED_SHOW';
-export const TABLE_RESET = 'TABLE_RESET';
+export const TABLE_RESET_TO_FULL = 'TABLE_RESET_TO_FULL';
+export const TABLE_RESET_TO_EMPTY = 'TABLE_RESET_TO_EMPTY';
 
 export const UNDO = 'UNDO';
 export const REDO = 'REDO';

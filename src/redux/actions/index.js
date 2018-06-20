@@ -7,9 +7,9 @@ import {
   ROW_ADD, 
   
   TABLE_REBUILD,
-  TABLE_REBUILT,
   TABLE_SAVED_SHOW,
-  TABLE_RESET,
+  TABLE_RESET_TO_FULL,
+  TABLE_RESET_TO_EMPTY,
 
   UNDO, 
   REDO,
@@ -73,12 +73,6 @@ export function tableRebuild() {
   }
 }
 
-export function tableRebuilt() {
-  return {
-    type: TABLE_REBUILT
-  }
-}
-
 export function tableSavedShow(ids) {
   return {
     type: TABLE_SAVED_SHOW,
@@ -86,8 +80,14 @@ export function tableSavedShow(ids) {
   }
 }
 
-export function tableReset(){
+export function tableResetToFull(){
   return{
-    type: TABLE_RESET
+    type: TABLE_RESET_TO_FULL
+  }
+}
+
+export function tableResetToEmpty(){
+  return{
+    type: TABLE_RESET_TO_EMPTY
   }
 }

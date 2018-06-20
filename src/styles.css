@@ -11,12 +11,22 @@ body {
   background-color: #BF616A;
 }
 
-.table td{
+.table td, .table th{
   width: 150px;
   border: solid black 1px;
 }
 
-.table tr td:nth-child(3) {
+.table tr:hover{
+  background-color: #B48EAD;
+}
+
+.table thead:hover{
+  background-color: #D08770;
+}
+
+
+
+.table td:nth-child(3) {
   width: 100px;
 }
 

@@ -5,72 +5,101 @@ import AddRow from '../components/AddRow';
 import AddItem from '../components/AddItem';
 import UndoRedo from '../components/UndoRedo';
 import MainTable from '../components/MainTable';
-import SavedTable from '../components/SavedTable';
 import RebuildTable from '../components/RebuildTable';
 import RebuiltTable from '../components/RebuiltTable';
-import ResetTable from '../components/ResetTable';
-import { undo, redo, 
-  rowAdd, itemAdd, itemDelete, itemEdit, itemEditStart,
-  tableRebuild, tableRebuilt, tableSavedShow, tableReset, } from '../redux/actions';
+import ResetToEmpty from '../components/ResetToEmpty';
+import ResetToFull from '../components/ResetToFull';
+import {
+  undo, redo, 
+  rowAdd, 
+  itemAdd, itemDelete, itemEdit, itemEditStart,
+  tableRebuild, tableSavedShow, tableResetToEmpty, tableResetToFull, 
+} from '../redux/actions';
 
 
 class Home extends React.Component {
-
   render() {
-    const { isTableShown, isTableReduilding, items, editingId, onEditClick, onDeleteClick, 
-      onStartEditClick, onAddRowClick, isRowAdding, onAddItemClick, onUndoClick, onRedoClick, 
-      isUndoDisabled, isRedoDisabled, onTableRebuilt, onShowSaved, rebuiltTableIds, onResetClick,
-      onRebuildClick,
+    const { items, isMainTableShown, isAddingInputOpen, isTableRebuilt, isSavedTableShown, editingId, savedItems,
+      isUndoDisabled, isRedoDisabled, onEditClick, onDeleteClick, onStartEditClick, onUndoClick, onRedoClick, 
+      onResetToEmptyClick, onResetToFullClick, onAddRowClick, onAddItemClick, onRebuildClick, onTableRebuilt, 
+      onShowSaved, 
     } = this.props
     return (
       <div>
-        {!(isTableShown || isTableReduilding) &&
-          <MainTable 
+        {
+          isMainTableShown && !isTableRebuilt && !isSavedTableShown &&
+          <div>
+            <MainTable 
             items={items} 
             editingId={editingId} 
             onEditClick={onEditClick} 
             onDeleteClick={onDeleteClick} 
-            onStartEditClick={onStartEditClick}/>}
-        {!(isTableReduilding || isTableShown) &&
-          <AddRow onAddRowClick={onAddRowClick}/>}
-        {isRowAdding &&
-          <AddItem onAddItemClick={onAddItemClick}/>}
-        {!isTableShown &&
+            onStartEditClick={onStartEditClick}/>
           <UndoRedo 
             onUndoClick={onUndoClick} 
             onRedoClick={onRedoClick} 
             isUndoDisabled={isUndoDisabled} 
-            isRedoDisabled={isRedoDisabled}/>}
-        {(items.length > 0 && !isTableShown && !isTableReduilding) &&
-          <RebuildTable onRebuildClick={onRebuildClick}/>}
-        {!(isTableReduilding && !isTableShown) ||
+            isRedoDisabled={isRedoDisabled}/>
+          </div>
+        }
+
+        {
+          (isTableRebuilt || isSavedTableShown) && isMainTableShown &&
+            <div>
+            <ResetToEmpty onResetToEmptyClick={onResetToEmptyClick}/>
+            <ResetToFull onResetToFullClick={onResetToFullClick}/>
+          </div>
+        }
+
+        {
+          !isTableRebuilt && !isAddingInputOpen  && 
+          <AddRow onAddRowClick={onAddRowClick} />
+        }
+
+        {
+          isAddingInputOpen && 
+          <AddItem onAddItemClick={onAddItemClick} />
+        }
+
+        {
+          !!items.length && !isSavedTableShown && !isTableRebuilt &&
+          <RebuildTable onRebuildClick={onRebuildClick} />
+        }
+
+        {
+          isTableRebuilt && !isSavedTableShown &&
           <RebuiltTable 
             items={items} 
             onTableRebuilt={onTableRebuilt} 
-            onShowSaved={onShowSaved}/>}
-        {rebuiltTableIds.length > 0 && 
-          <div>
-            <SavedTable 
-              ids = {rebuiltTableIds} 
-              items={items}/>
-            <ResetTable onResetClick={onResetClick}/>
-          </div>}
+            onShowSaved={onShowSaved} />
+        }
+
+        {
+          isSavedTableShown && 
+          <MainTable 
+            items={savedItems} 
+            editingId={editingId} 
+            onEditClick={onEditClick} 
+            onDeleteClick={onDeleteClick} 
+            onStartEditClick={onStartEditClick}/>
+        }
       </div>
     )
   }
 }
 
-function mapStateToProps ({ items, editingId, isRowAdding, isTableReduilding, RebuiltTable, rebuiltTableIds, isTableShown }) {
+function mapStateToProps ({ items, isMainTableShown, isAddingInputOpen, isTableRebuilt, isUndoDisabled, isRedoDisabled, isSavedTableShown, editingId, savedItems, }) {
   return {
     items: items.present,
+    isMainTableShown,
+    isAddingInputOpen,
+    isUndoDisabled,
+    isRedoDisabled,
+    isTableRebuilt,
+    isSavedTableShown,
     editingId,
-    isRowAdding,
-    isUndoDisabled: items.past.length === 0 && isTableReduilding.past.length === 0,
-    isRedoDisabled: items.future.length === 0 && isTableReduilding.future.length === 0,
-    isTableReduilding: isTableReduilding.present,
-    rebuiltTableIds,
-    isTableShown,
-  }
+    savedItems,
+  };
 }
 
 const mapDispatchToProps = {
@@ -81,11 +110,10 @@ const mapDispatchToProps = {
   onRebuildClick: tableRebuild,
   onEditClick: itemEdit,
   onDeleteClick: itemDelete,
-  onTableRebuilt: tableRebuilt,
   onShowSaved: tableSavedShow,
   onStartEditClick: itemEditStart,
-  onResetClick: tableReset,
-}
+  onResetToEmptyClick: tableResetToEmpty,
+  onResetToFullClick: tableResetToFull,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-

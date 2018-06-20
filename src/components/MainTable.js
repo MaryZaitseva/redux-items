@@ -21,7 +21,8 @@ class MainTable extends React.Component {
         onMouseLeave={() => this.mouseOverOut(false)}
         key={index}
         index={index}
-        className={isHovered ? 'hovered' : ''}>
+        
+      >
         <td>{items[index].name}</td>
         <td>{items[index].cost}</td>
         {isHovered &&  <ChangeRow
@@ -48,15 +49,19 @@ class MainTable extends React.Component {
     const { editingId, items } = this.props;
 
     return (
-      <table className='table'><tbody>
-        <tr>
-          <td>Item</td>
-          <td>Cost</td>
-        </tr>
-        {items.map((item, index) =>
-          editingId === index ? this.renderItemEdit(index) : this.renderItem(index)
-        )}
-      </tbody></table>
+      <table className='table'>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, index) =>
+            editingId === index ? this.renderItemEdit(index) : this.renderItem(index)
+          )}
+        </tbody>
+      </table>
     )
   }
 }

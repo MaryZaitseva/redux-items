@@ -8,14 +8,10 @@ class RebuiltTable extends React.Component{
     this.state = {
         selectedIds: []
     }
-    this.handleLoad = this.handleLoad.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleSelecting = this.handleSelecting.bind(this);
   }
 
-  handleLoad(e){
-    this.props.onTableRebuilt();
-  }
 
   handleSelecting(e){
     if(e.currentTarget.checked){
@@ -46,7 +42,7 @@ class RebuiltTable extends React.Component{
 
     return( 
       <div>
-        <table onLoad={this.handleLoad} className='rebuilt-table'>
+        <table className='rebuilt-table'>
           <tbody>
             <tr>
               <td></td>
