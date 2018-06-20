@@ -24,7 +24,7 @@ class Home extends React.Component {
     } = this.props
     return (
       <div>
-        {(isTableShown || isTableReduilding) ||
+        {!(isTableShown || isTableReduilding) &&
           <MainTable 
             items={items} 
             editingId={editingId} 
@@ -43,7 +43,7 @@ class Home extends React.Component {
             isRedoDisabled={isRedoDisabled}/>}
         {(items.length > 0 && !isTableShown && !isTableReduilding) &&
           <RebuildTable onRebuildClick={onRebuildClick}/>}
-        {isTableReduilding && !isTableShown &&
+        {!(isTableReduilding && !isTableShown) ||
           <RebuiltTable 
             items={items} 
             onTableRebuilt={onTableRebuilt} 

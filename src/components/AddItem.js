@@ -19,7 +19,7 @@ class AddItem extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className='add-item-input'>
 				<input type='text' name='name' onChange={this.updateProp}/>
 				<input type='text' name='cost' onChange={this.updateProp}/>
 				<button className='add-button' style={{float: 'left'}} onClick={this.submit}>Add Item</button>
