@@ -31,7 +31,7 @@ class Home extends React.Component {
             onEditClick={onEditClick} 
             onDeleteClick={onDeleteClick} 
             onStartEditClick={onStartEditClick}/>}
-        {isTableReduilding || isTableShown || 
+        {!(isTableReduilding || isTableShown) &&
           <AddRow onAddRowClick={onAddRowClick}/>}
         {isRowAdding &&
           <AddItem onAddItemClick={onAddItemClick}/>}
@@ -41,7 +41,7 @@ class Home extends React.Component {
             onRedoClick={onRedoClick} 
             isUndoDisabled={isUndoDisabled} 
             isRedoDisabled={isRedoDisabled}/>}
-        {items.length > 0 && !isTableShown && !isTableReduilding &&
+        {(items.length > 0 && !isTableShown && !isTableReduilding) &&
           <RebuildTable onRebuildClick={onRebuildClick}/>}
         {isTableReduilding && !isTableShown &&
           <RebuiltTable 

@@ -2,10 +2,6 @@ body {
   font-family: sans-serif;
 }
 
-.hovered{
-  background-color: #B48EAD;
-}
-
 .table, .rebuilt-table, .saved-table{
   border: solid black 1px;
   border-collapse: collapse;
@@ -20,26 +16,8 @@ body {
   border: solid black 1px;
 }
 
-input[type="text"]{
- width: 150px; 
- background-color: #BF616A;
- float: left;
-}
-
-button{
-  float: right;
-}
-
-.hidden{
-  display: none;
-}
-
 .table tr td:nth-child(3) {
   width: 100px;
-}
-
-a{
-  margin-left: 20px;
 }
 
 .rebuilt-table{
@@ -63,5 +41,25 @@ a{
 
 input[type="checkbox"]{
   width: 10px;
+}
+
+input[type="text"]{
+ width: 150px; 
+ background-color: #BF616A;
+ float: left;
+}
+
+button{
+  float: right;
+}
+
+
+
+a{
+  margin-left: 20px;
+}
+
+.hovered{
+  background-color: #B48EAD;
 }
 

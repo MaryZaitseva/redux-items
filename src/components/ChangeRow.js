@@ -20,8 +20,8 @@ class ChangeRow extends React.Component {
 	render() {
 		return (
 			<td>
-				<a onClick={this.handleDeleteClick} href="">x</a>
-				<a onClick={this.handleEditClick} href="">edit</a>
+				<a onClick={this.handleDeleteClick} href=''>x</a>
+				<a onClick={this.handleEditClick} href=''>edit</a>
 			</td>
 		)
 	}

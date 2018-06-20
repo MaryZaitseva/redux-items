@@ -37,9 +37,9 @@ class RebuiltTable extends React.Component{
     let items = this.props.items.map((item, index) => {
       return (
         <tr key={index} >
-          <td><input id={index} type="checkbox" onClick={this.handleSelecting}/></td>
-          <td>{item[1]}</td>
-          <td>{item[2]}</td>
+          <td><input id={index} type='checkbox' onClick={this.handleSelecting}/></td>
+          <td>{item.name}</td>
+          <td>{item.cost}</td>
         </tr>
       )
     })

@@ -13,8 +13,8 @@ const SavedTable = props => {
 	let newItemsShown = newItems.map((item, index) => {
 		return(
 			<tr key={index} >
-				<td>{item[1]}</td>
-				<td>{item[2]}</td>
+				<td>{item.name}</td>
+				<td>{item.cost}</td>
 			</tr>
 		)
 	})
