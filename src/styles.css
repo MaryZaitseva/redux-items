@@ -16,7 +16,7 @@ body {
   border: solid black 1px;
 }
 
-.table tr:hover{
+.table tr:not(th):hover{
   background-color: #B48EAD;
 }
 

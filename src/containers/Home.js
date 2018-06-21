@@ -19,11 +19,13 @@ import {
 
 class Home extends React.Component {
   render() {
-    const { items, isMainTableShown, isAddingInputOpen, isTableRebuilt, isSavedTableShown, editingId, savedItems,
+    const { 
+      items, isMainTableShown, isAddingInputOpen, isTableRebuilt, isSavedTableShown, editingId, savedItems,
       isUndoDisabled, isRedoDisabled, onEditClick, onDeleteClick, onStartEditClick, onUndoClick, onRedoClick, 
       onResetToEmptyClick, onResetToFullClick, onAddRowClick, onAddItemClick, onRebuildClick, onTableRebuilt, 
       onShowSaved, 
-    } = this.props
+    } = this.props;
+
     return (
       <div>
         {
@@ -88,7 +90,10 @@ class Home extends React.Component {
   }
 }
 
-function mapStateToProps ({ items, isMainTableShown, isAddingInputOpen, isTableRebuilt, isUndoDisabled, isRedoDisabled, isSavedTableShown, editingId, savedItems, }) {
+function mapStateToProps ({
+  items, isMainTableShown, isAddingInputOpen, isUndoDisabled,
+  isRedoDisabled, isTableRebuilt, isSavedTableShown, editingId, savedItems, }) {
+  
   return {
     items: items.present,
     isMainTableShown,

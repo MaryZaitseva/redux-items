@@ -26,7 +26,7 @@ class UndoRedo extends React.Component{
 					Redo
 				</button>
 			</div>
-		)
+		);
 	}
 }
 

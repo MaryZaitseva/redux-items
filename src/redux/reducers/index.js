@@ -28,14 +28,16 @@ const initialState = {
 	editingId: null, 
 	savedItems: null, 
   isUndoDisabled: true, 
-  isRedoDisabled: true,
+  isRedoDisabled: true, 
+  pastLength: null,
+  futureLength: null, 
 };
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ITEM_ADD: 
 			const present = [...state.items.present, {id: action.id, name: action.name, cost: action.cost }];
-
+			
 			return {
 				...state, 
 				items: {
@@ -44,8 +46,8 @@ const rootReducer = (state = initialState, action) => {
 					present: present, 
 					future: [],
 				},
-				isAddingInputOpen: false,
-        isUndoDisabled: false,
+				isAddingInputOpen: false,  
+        isUndoDisabled: false, 
 			};
 
 		case ITEM_EDIT_START: 
@@ -55,7 +57,8 @@ const rootReducer = (state = initialState, action) => {
 			const presentItemsEdited = state.items.present.map((i, k) => {
 				if (k === +action.id) {
 					return {id: action.id, name: action.name, cost: action.cost };
-				} else {
+				} 
+        else {
 				 return i;
 				}
 			});
@@ -88,6 +91,7 @@ const rootReducer = (state = initialState, action) => {
 			const lastItem = [...state.items.past[state.items.past.length -1]];
 			const past = state.items.past.slice(0, state.items.past.length - 1);
 			const future = [[...state.items.present], ...state.items.future];
+
 			return {
         ...state, 
 				items: {
@@ -96,21 +100,23 @@ const rootReducer = (state = initialState, action) => {
 					present: lastItem,
 					future,
 				},
-        isUndoDisabled: state.items.past.length === 0,
-        isRedoDisabled: state.items.past.length === 0,
+        isUndoDisabled: past.length === 0,
+        isRedoDisabled: false, 
 			};
 
 		case REDO: 
+      const redoFuture = state.items.future.slice(1);
+
 			return {
         ...state, 
 				items: {
           ...state.items, 
 					past: [...state.items.past, [...state.items.present]],
 					present: state.items.future[0],
-					future: state.items.future.slice(1),
+					future: redoFuture,
 				},
-        isUndoDisabled: state.items.past.length === 0,
-        isRedoDisabled: state.items.past.length === 0,
+        isUndoDisabled: false,
+        isRedoDisabled: redoFuture.length === 0, 
 			};
 			
 
